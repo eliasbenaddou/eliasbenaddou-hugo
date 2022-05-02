@@ -1,4 +1,4 @@
-baseurl           = "https://eliasbenaddou.com"
+baseurl           = "https://eliasbenaddou-hugo.pages.dev"
 theme             = "hugo-casper-v4"
 languageCode      = "en-UK"
 disqusShortname   = "huo-casper-v4"
