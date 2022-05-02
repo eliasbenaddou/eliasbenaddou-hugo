@@ -1,0 +1,105 @@
+baseurl           = "https://eliasbenaddou.com"
+theme             = "hugo-casper-v4"
+languageCode      = "en-UK"
+disqusShortname   = "huo-casper-v4"
+enableRobotsTXT   = true
+canonifurls       = true
+Title             = "Elias Benaddou Idrissi"
+summaryLength     = "30"
+background       = "/images/content.jpg"
+
+[markup]
+  defaultMarkdownHandler = "goldmark"
+  [markup.blackFriday]
+    angledQuotes = false
+    footnoteAnchorPrefix = ""
+    footnoteReturnLinkContents = ""
+    fractions = true
+    hrefTargetBlank = false
+    latexDashes = true
+    nofollowLinks = false
+    noreferrerLinks = false
+    plainIDAnchors = true
+    skipHTML = false
+    smartDashes = true
+    smartypants = true
+    smartypantsQuotesNBSP = false
+    taskLists = true
+  [markup.goldmark]
+    [markup.goldmark.extensions]
+      definitionList = true
+      footnote = true
+      linkify = true
+      strikethrough = true
+      table = true
+      taskList = true
+      typographer = true
+    [markup.goldmark.parser]
+      attribute = true
+      autoHeadingID = true
+    [markup.goldmark.renderer]
+      hardWraps = false
+      unsafe = true
+      xHTML = false
+  [markup.highlight]
+    codeFences = false
+    hl_Lines = ""
+    lineNoStart = 1
+    lineNos = false
+    lineNumbersInTable = true
+    noClasses = true
+    style = "monokai"
+    tabWidth = 4
+  [markup.tableOfContents]
+    endLevel = 3
+    startLevel = 2
+
+[params]
+  title       = "Elias Benaddou Idrissi"
+  subtitle    = "A collection of my thoughts in digital form"
+  copyright   = "2019"
+  favicon     = "/images/favicon.ico"
+  cover       = "/img/shard.jpeg"
+  description = "A collection of my thoughts in digital form"
+  metaDescription = "A collection of my thoughts in digital form"
+  keywords = "hugo, static site, themes"
+  customCSS = []
+  RSSLink = "/index.xml"
+
+  twitterName = ""
+  linkedinName = "eliasbenaddouidrissi"
+  fbName = ""
+  githubName = "eliasbenaddou"
+
+  logoFloat = ""
+  orgName = "Elias Benaddou Idrissi"
+  orgWebsite = ""
+  orgDescription = ""
+
+  pageNotFoundTitle = "404 - Page not found"
+
+  show_reading_time = true
+  
+  hjsStyle = "base16/tomorrow-night"
+
+[taxonomies]
+author = "authors"
+tag = "tags"
+category = "categories"
+
+[permalinks]
+  post = "/:slug/"
+  author = "/authors/"
+  tag = "/tags/:slug"
+
+[menu]
+  [[menu.main]]
+    identifier = "About"
+    name = "About"
+    url = "/about"
+    weight = 10
+
+[sitemap]
+  ChangeFreq = ""
+  Filename = "sitemap.xml"
+  Priority = "-1"
