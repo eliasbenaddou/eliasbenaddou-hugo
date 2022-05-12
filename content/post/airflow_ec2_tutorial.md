@@ -5,7 +5,7 @@ draft: false
 slug: ""
 tags: ["tutorial"]
 image: "/img/airflow_dark.png"
-summary: "How to setup an AWS EC2 instance and install Apache Airflow with pip to schedule your data pipelines"
+summary: "How to setup an AWS EC2 instance and install Apache Airflow with pip to schedule and monitor your data pipelines"
 ---
 
 <center>{{< figure src="/img/airflow_words.png" width=200 caption="source: https://cwiki.apache.org/confluence/display/AIRFLOW/Airflow+logos"  >}}</center>

@@ -10,7 +10,7 @@ image = ""
 weight = 111
 +++
 
-<center>{{< figure src="/img/elias.jpeg" title="" width=500 >}}</center>
+<center>{{< figure src="/img/elias.jpeg" title="" width=400 >}}</center>
 
-I'm a data engineer with an analytical background. I'm interested in blockchain technology and personal finance. 
+<center><h6>I'm a data engineer with an analytical background. I'm interested in blockchain technology and personal finance. </h6></center>
 
