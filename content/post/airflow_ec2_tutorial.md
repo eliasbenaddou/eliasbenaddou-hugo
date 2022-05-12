@@ -143,7 +143,7 @@ For a more robust production deployment, you will want to upgrade the database t
 
 ## Initialising Airflow
 
-Airflow provides a 'standalone' command to initialise Airflow which includes creating a user, configuring your database and launching your webserver and scheduler. Let's run each component individually to understand how it works. First we'll need to kick start Airflow to create the required directory where we earlier defined the home directory:
+Airflow provides a 'standalone' command to initialise Airflow which includes creating a user, configuring your database and launching your webserver and scheduler. Let's run each component individually instead to understand how it works. First we'll need to kick start Airflow to create the required directory where we earlier defined as the home directory:
 
 ```terminal
 airflow db init
@@ -154,14 +154,14 @@ This will create the SQLite database and the directories. Next, add an admin use
 ```terminal
 airflow users create \
     --username admin \
-    -- password admin
+    --password admin \
     --firstname <your_name> \
     --lastname <your_last_name> \
     --role Admin \
     --email <your_email>
 ```
 
-Finally, to start your Airflow webserver and scheduler, you will need to run them in separate shells or use '-D' to run it in the background:
+To start your Airflow webserver and scheduler, you will need to run them in separate shells or use '-D' to run it in the background in a single session:
 
 ```terminal
 airflow webserver -p 8080 -D
@@ -170,10 +170,11 @@ airflow webserver -p 8080 -D
 airflow scheduler -D
 ```
 
-That's it - you now have Airflow running. Visit your EC2's public IPv4 DNS which should look something like 'ec2-12-345-678-901.eu-west-2.compute.amazonaws.com' and ensure to add a colon folowed by the port 8080 at the end of the address. You should see a list of all the example loaded DAGs and you're now ready to add your own. To hide these, you'll need to set the 'load_example_dags' variable to 'False' in the configuration file 'airflow.cfg'. This also holds your database connections and many other settings. Read more about what you can change on Airflow's official documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html).
-
+Lastly, you will need to create the 'dags' folder within the root directory of your Airflow home directory where you will store your own DAGs. I'll be going into more detail about how to write your first DAG in another tutorial.
 
 <center>{{< figure src="/img/airflow_webserver.png"  caption="Airflow homepage showing example DAGs"  >}}</center>
 
+That's it - you now have Airflow running using the SequentialExecutor and a SQLite database. Visit your EC2's public IPv4 DNS which should look something like 'ec2-12-345-678-901.eu-west-2.compute.amazonaws.com' and ensure to add a colon folowed by the port 8080 at the end of the address. You should see a list of all the example loaded DAGs and you're now ready to add your own. To hide these, you'll need to set the 'load_example_dags' variable to 'False' in the configuration file 'airflow.cfg'. This also holds your database connections and many other settings. Read more about what you can change on Airflow's official documentation [here](https://airflow.apache.org/docs/apache-airflow/stable/howto/set-config.html).
 
-Lastly, you will need to create the 'dags' folder within the root directory of your Airflow home directory where you will store your own DAGs. The scheduler will pick up any new Python DAG files and will load them - checkout my next article on creating your first DAG.
+
+
