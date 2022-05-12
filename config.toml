@@ -1,7 +1,7 @@
 baseurl           = "https://eliasbenaddouidrissi.com"
 theme             = "hugo-casper-v4"
 languageCode      = "en-UK"
-disqusShortname   = "huo-casper-v4"
+disqusShortname   = "eliasbenaddouidrissi-com"
 enableRobotsTXT   = true
 canonifurls       = true
 Title             = "Elias Benaddou Idrissi"

@@ -33,11 +33,12 @@
                         </div>
                     </div>
                 </section>
-            </div>        
+            </div>                    
         </header>
         <section class="gh-content gh-canvas">       
             <h1 class="article-title"></h1>
             {{ .Content }}
+            {{ partial "disqus" . }}
         </section>
         
     </article>

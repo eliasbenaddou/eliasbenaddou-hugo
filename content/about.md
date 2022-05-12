@@ -12,5 +12,5 @@ weight = 111
 
 <center>{{< figure src="/img/elias.jpeg" title="" width=400 >}}</center>
 
-<center><h6>I'm a data engineer with an analytical background. I'm interested in blockchain technology and personal finance. </h6></center>
+<center><h6>I'm a data engineer with an analytical background. I'm interested in blockchain technology and personal finance. I like to write about things I've learned both personally and professionally and most importantly about technology, cloud computing and software development  </h6></center>
 
