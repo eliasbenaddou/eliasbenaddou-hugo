@@ -14,9 +14,9 @@ summary: "How to setup an AWS EC2 instance and install Apache Airflow with pip t
 ---
 
 1. [Setting up EC2 on AWS](#setting-up-ec2)
-2. [Python and Pip](#python-and-pip)
+2. [Python and Pip](#python-and-pip3)
 3. [Creating a virtual environment](#creating-a-virtual-environment)
-3. [Installing Airflow](#installing-ariflow)
+3. [Installing Airflow](#installing-airflow)
 4. [Initialising Airflow](#initialising-airflow)
 
 Apache Airflow is a widely used open source tool in organisations with large amounts of data processing. Created by AirBnb in 2015, Airflow is highly extensible, supporting many use cases in data engineering. It is desgined to orchestrate your data pipelines which are defined by [directed acyclic graphs](https://airflow.apache.org/docs/apache-airflow/stable/concepts/dags.html) (DAGs). Each DAG contains tasks with dependencies and relationships on how they should run. The rich UI webserver allows you to monitor your pipelines and get workflow-related insights.
