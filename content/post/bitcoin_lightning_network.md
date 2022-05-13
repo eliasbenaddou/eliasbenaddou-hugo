@@ -71,7 +71,7 @@ The LN has made significant progress with the adoption rate rising steadily as m
 <center>{{< figure src="/img/ln_trend.png"  caption="Increase in Bitcoin transacting using the Lightning Network since inception. <br> Source: https://cvj.ch/en/focus/background/bitcoin-lightning-network-records-record-growth/"  >}}</center>
 
 
-This technology has the potential to disrupt the payments industry by providing merchants with a low fee for handling transactions and could expand to other assets such as stablecoins. Stablecoins that are backed by physical assets are becoming an integral part of the digital currency space. The UK recently gave the green light on incorporating stablecoins as a payment method and put forward adjustments to the existing regulatory framework. 
+This technology has the potential to disrupt the payments industry by providing merchants with a low fee for handling transactions and could expand to other assets such as stablecoins. Stablecoins that are backed by physical assets are becoming an integral part of the digital currency space. The UK recently gave the green light on [incorporating stablecoins](https://cointelegraph.com/news/uk-government-moves-forward-with-regulatory-framework-on-stablecoins-for-payments) as a payment method and put forward adjustments to the existing regulatory framework. 
 
 Personally I'm quite excited to see how projects like the Lightning Network will evolve over the next decade and to watch the race between countries eager to be leading the new age of digital currencies.
 
