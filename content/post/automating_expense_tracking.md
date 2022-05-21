@@ -1,5 +1,5 @@
 ---
-title: "Automating Budget Tracking on Notion with Monzo's API"
+title: "Automating Budget Tracking on Notion with Monzo's API with Airflow"
 date: 2022-05-20T22:43:03+01:00
 draft: false
 slug: ""
