@@ -17,7 +17,8 @@ summary: "Personal project building an automated budgetting tool using Monzo's A
 
 ### Requirements
 
-- AWS Account for Postgres database and EC2 virtual machine 
+- AWS Account for Postgres database 
+- EC2 virtual machine for Linux/Ubuntu
 - Airflow for scheduling
 - Monzo Bank Account 
 - Notion database tables 
