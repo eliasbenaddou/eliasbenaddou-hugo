@@ -37,9 +37,9 @@ summary: "How to use a Python wrapper for cryptocurrency exchange Gemini to inte
 
 ## About The Project
 
-I recently started working on creating a complete Python project using the some of the best pracices when it comes to
-writing code, documentation and software engineering. This involved putting together a wrapper for Gemini's APIs and we'll
-be using it here to interact with Gemini.
+I recently started working on creating a complete Python project using the some of the best practices when it comes to
+writing code, documentation and software engineering. This involved putting together a mostly class based Python wrapper for Gemini's APIs and we'll
+be exploring a few examples of it here.
 
 **Github repository**: https://github.com/eliasbenaddou/gemini_api  
 **Documentation**: https://eliasbenaddou.github.io/gemini_api/
@@ -47,11 +47,11 @@ be using it here to interact with Gemini.
 ## Getting Started
 ### Prerequisites
 
-To get started you'll need a Gemini account and to generate a set of account keys.
+To get started you'll need a Gemini account and to generate a set of account keys. In this article, we'll be generating Gemini Sandbox API keys which is recommended for familiarising yourself with their APIs before using it on your real money account. You'll need to sign up for a separate Sandbox exchange account on https://exchange.sandbox.gemini.com/.
 Navigate to the API section under your account settings and create a pair of public and private keys.
 Select the tick boxes to give permissions to your account for Fund Management, Trading and Admin and ensure you keep the keys in a safe place before closing the page.
 
-When provisioning a session key, you have the option of marking the session as "Requires Heartbeat". When selected, if the exchange does not receive a message for 30 seconds, then it will assume there has been an interruption in service and all outstanding orders on this session will be canceled. To maintain the session, you must send a heartbeat message at a more frequent interval. 
+When provisioning a session key, you have the option of marking the session as "Requires Heartbeat". When selected, if the exchange does not receive a message for 30 seconds, then it will assume there has been an interruption in service and all outstanding orders on this session will be cancelled. To maintain the session, you must send a heartbeat message at a more frequent interval. 
 
 ### Installation
 
@@ -83,8 +83,8 @@ public.get_pair_details('btcgbp')
  'status': 'open',
  'wrap_enabled': False}
 ```
-
-The ticker endpoint will give information about recent trading activity
+The result dictionary contains information about the ticker size and quote increment, which will be useful when creating orders.
+The ticker endpoint gives information about recent trading activity and is fetched using the 'get_ticker' function with the trading symbol as the input parameter.
 
 ```python
 p.get_ticker('btcgbp')
@@ -98,28 +98,26 @@ p.get_ticker('btcgbp')
  'last': '16311.60'}
 ```
 
-The timestamp is given in the Unix format as an integer, and can be converted into a regular date format.
+The timestamp is given in Unix format as an integer, and can be converted into a regular date format.
 
-If we wanted to get candle data for a regular time interval of 30 minutes, we could use the get_candles() method
-and parse in the time frame as '30m'. We'll also convert the result into a dataframe, convert the 
-date into a Pandas datetime object and order the dataframe
+To get candle data for a regular time interval of 30 minutes, we can use the 'get_candles' method
+and parse in the time frame as '30m'. We'll also manipulate the result into a dataframe, convert the 
+date into a Pandas datetime object and order the dataframe by the date.
 
 ```python
 btc_data = p.get_candles('btcgbp', '30m')
 btc_data_df = pd.DataFrame(pp, columns =['date','open','high','low','close','volume'])
 btc_data_df['date'] = pd.to_datetime(btc_data_df['date'], unit='ms')
-
 btc_data_df.set_index('date', inplace=True)
 btc_data_df.sort_values('date', inplace=True)
-
-btc_data_df
+print(btc_data_df)
 ```
 <center>{{< figure src="/img/btc_data_df.png" caption="" >}}</center>
 
 #### Private API
 ##### Creating Orders
 Let's look at some examples of creating orders in Gemini's Sandbox exchange environment. This is done by
-setting the sandbox parameter in the class instantiation to true.
+setting the sandbox parameter in the class instantiation to true when Sandbox API keys are used.
 
 ```python
 from gemini_api.endpoints.order import Order
@@ -142,15 +140,15 @@ print(x.order_id)
 ```
 
 ```python
-"123456789"
+"128459183"
 ```
 
-The snippet above has the keys redacted, but these will be the Sandbox API keys you generated initially.
-An 'Order' object is created and the class method to create a new order is executed with the resulting 'order_id' attribute printed. The 'option' parameter means the order will wait to be filled until the price is hit and Gemini offers several different ways to make an order, which we'll cover more of later on.
+An 'Order' object is created and the class method to create a new order is executed with the resulting 'order_id' attribute printed.
+The 'options' parameter 'make-or-cancel' means the order will wait to be filled until the price is hit. Gemini offers several different ways to make an order, which we'll cover more of later on.
 
 ##### Cancelling Orders
 
-To cancel a order, you just need to specify the order_id and the resulting object will bring back the order_id status with the attribute 'is_cancelled" as True.
+To cancel a order, you need to specify the 'order_id' and the resulting object will bring back the order status with the attribute 'is_cancelled" as True.
 
 ```python
 x = Order.cancel_order(
@@ -165,22 +163,27 @@ print(x.is_cancelled)
 True
 ```
 
-You can also cancel all orders created in the session at once or all active orders (rincludes orders created outside of the session) on your account with either of the following
+You can also cancel all orders created in the session at once or all active orders (rincludes orders created outside of the current session) on your account with either of the following
 
 ```python
 Order.cancel_session_orders(auth=auth)
+```
+
+```python
 Order.cancel_active_orders(auth=auth)
 ```
 
-##### Market-like Orders Based on Price Information
+##### Market Orders Based on Price Information
 
-Gemini doesn't allow market orders via the API for technical reasons, however they offer multiple execution options. By default, the option is set to "maker-or-cancel", which only adds liquidity to the order book. If any of the order is filled immediately, the whole order will instead be cancelled before any execution occurs. 
+Gemini doesn't allow market orders via the API, however they offer multiple execution options. By default, the option is set to "maker-or-cancel", which only adds liquidity to the order book. If any of the order is filled immediately, the whole order will instead be cancelled before any execution occurs. 
 
 The "immediate-or-cancel" option will remove liquidity and fill whatever it can immediately and cancel any remaining. There is also "fill-or-kill" to fill the entire order immediately or cancel and "auction-only" to add the order to the auction-only book.
 
-We can combine the public API methods to get BTC prices and the private API methods to create buy orders. From https://docs.gemini.com/rest-api/#symbols-and-minimums we'll obtain the tick size and quote currency price increment which we'll use in the script to mimick the behavior of a market order. Here, we'll try to make a new order to purchase £200 worth of BTC at just below the current price of BTC by using a factor, which will complete if the price drops down slightly and is already below our desired upper boundary of £20,000.
+We can combine the public API methods to get BTC prices and the private API methods to create buy orders. From https://docs.gemini.com/rest-api/#symbols-and-minimums we'll obtain the tick size and quote currency price increment which we'll use in the script to mimick the behavior of a market order.  
 
-Using this method is the cheapest way to dollar cost average on the platform as the fee schedule for the API is 0.2% for the 'Maker Fee'. For fee inclusion in our order, we'll multiply the buy size by 0.998 and use a factor of 0.999 to get an execution price just under the current ask.
+Here, we'll try to make a new order to purchase £200 worth of BTC at just below the current price of BTC by using a factor, which will complete if the price drops down slightly and is already below our defined upper boundary of £20,000.
+
+Using this method is the cheapest way to 'DCA' on the platform as the fee schedule for the API is 0.2% for the 'Maker Fee'. For fee inclusion in our order, we'll multiply the buy size by 0.998 and use a factor of 0.999 to get an execution price just under the current ask.
 
 ```python
 from datetime import datetime
