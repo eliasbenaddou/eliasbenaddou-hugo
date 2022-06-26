@@ -29,7 +29,7 @@ summary: "How to use a Python wrapper for cryptocurrency exchange Gemini to inte
             <ul>
                 <li><a href="#creating-orders">Creating Orders</a></li>
                 <li><a href="#cancelling-orders">Cancelling Orders</a></li>
-                <li><a href="#market-like-orders-based-on-price-information">Market-Like Orders</a></li>
+                <li><a href="#market-orders-based-on-price-information">Market Orders</a></li>
             </ul>
         </ul>
     <li><a href="#roadmap">Roadmap</a></li>
